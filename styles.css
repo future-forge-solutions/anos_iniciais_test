@@ -343,7 +343,6 @@ body {
     height: auto;
     display: block;
     border-radius: 20px;
-    /* Eliminamos el cursor:pointer por defecto */
 }
 
 /* Estilo para los enlaces del carrusel */

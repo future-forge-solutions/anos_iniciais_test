@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
                 // Parsear cada línea con formato "image:ruta/imagen.jpg link:https://enlace.com"
                 const imageMatch = line.match(/image:([^\s]+)/);
-                const linkMatch = line.match(/link:(.*)$/);
+                const linkMatch = line.match(/link:\s*(.*?)\s*$/);
 
                 console.log(`Línea ${index + 1} - imageMatch:`, imageMatch);
                 console.log(`Línea ${index + 1} - linkMatch:`, linkMatch);
@@ -114,7 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 slide.appendChild(anchor);
                 img.draggable = false;
                 img.style.userSelect = 'none';
-                img.style.cursor = 'pointer';
             } else {
                 slide.appendChild(picture);
             }
