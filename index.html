@@ -69,7 +69,10 @@
     <main class="main-content">
         <!-- Hero Section -->
         <section class="hero">
-            <img src="https://anos-iniciais-test.pages.dev/images/mobile/banner.webp" alt="Banner" fetchpriority="high" loading="eager" style="width: 100%; height: 100%; object-fit: cover;">
+            <picture>
+                <source media="(max-width: 768px)" srcset="images/mobile/banner.webp">
+                <img src="images/banner.webp" alt="Banner" fetchpriority="high" loading="eager" style="width: 100%; height: 100%; object-fit: cover;">
+            </picture>
         </section>
 
         <!-- Content Grid -->
