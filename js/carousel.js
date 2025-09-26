@@ -123,7 +123,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             const dot = document.createElement('button');
             dot.className = 'carousel-dot';
-            if (index === 0) dot.classList.add('active');
+            dot.setAttribute('aria-label', `Ir para slide ${index + 1}`);
+            if (index === 0) {
+                dot.classList.add('active');
+                dot.setAttribute('aria-current', 'true');
+            }
             dot.addEventListener('click', () => goToSlide(index));
             dotsContainer.appendChild(dot);
             dots.push(dot);
@@ -137,6 +141,11 @@ document.addEventListener('DOMContentLoaded', function () {
         carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
         dots.forEach((dot, index) => {
             dot.classList.toggle('active', index === currentIndex);
+            if (index === currentIndex) {
+                dot.setAttribute('aria-current', 'true');
+            } else {
+                dot.removeAttribute('aria-current');
+            }
         });
     }
 
