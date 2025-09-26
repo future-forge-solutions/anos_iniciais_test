@@ -349,8 +349,9 @@ body {
 /* Estilo para los enlaces del carrusel */
 .carousel-link {
     display: block;
-    /* El cursor:pointer solo se aplica a los enlaces */
     cursor: pointer;
+    min-height: 44px; /* Asegurar área táctil mínima */
+    min-width: 44px; /* Asegurar área táctil mínima */
 }
 
 /* Asegura que el cursor sea una mano al pasar sobre cualquier elemento dentro del enlace */
@@ -365,8 +366,8 @@ body {
     background: rgba(255, 255, 255, 0.7);
     border: none;
     border-radius: 50%;
-    width: 40px; /* Tamaño original para desktop */
-    height: 40px;
+    width: 44px; /* Tamaño táctil para todos los dispositivos */
+    height: 44px;
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -375,15 +376,6 @@ body {
     font-size: 18px;
     z-index: 10;
     transition: all 0.3s ease;
-}
-
-/* Botones de navegación optimizados SOLO para móvil */
-@media (max-width: 768px) {
-    .carousel-button {
-        width: 44px; /* Tamaño táctil óptimo para móvil */
-        height: 44px;
-        font-size: 20px; /* Icono ligeramente más grande */
-    }
 }
 
 .carousel-button:hover {
@@ -398,6 +390,39 @@ body {
     right: 15px;
 }
 
+
+.carousel-dot {
+    /* Tamaño base táctil para todos los dispositivos */
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    /* Indicador visual pequeño dentro */
+}
+
+.carousel-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+}
+
+.carousel-dot.active::before {
+    background: #fff;
+    transform: translate(-50%, -50%) scale(1.2);
+}
+
 .carousel-dots {
     position: absolute;
     bottom: 15px;
@@ -405,60 +430,14 @@ body {
     right: 0;
     display: flex;
     justify-content: center;
-    gap: 10px;
+    gap: 16px; /* Separación táctil */
     z-index: 10;
 }
 
-.carousel-dot {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.5);
-    border: none;
-    padding: 0;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.carousel-dot.active {
-    background: #fff;
-    transform: scale(1.2);
-}
-
-/* Objetivos táctiles optimizados SOLO para móvil */
-@media (max-width: 768px) {
+/* Ajuste visual para desktop (opcional) */
+@media (min-width: 769px) {
     .carousel-dots {
-        gap: 16px; /* Mayor separación en móvil */
-    }
-
-    .carousel-dot {
-        width: 44px; /* Tamaño táctil óptimo para móvil */
-        height: 44px;
-        position: relative;
-        background: transparent; /* Área táctil invisible */
-    }
-
-    .carousel-dot::before {
-        content: '';
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 12px;
-        height: 12px;
-        border-radius: 50%;
-        background: rgba(255, 255, 255, 0.5);
-        transition: all 0.3s ease;
-    }
-
-    .carousel-dot.active {
-        background: transparent;
-        transform: none;
-    }
-
-    .carousel-dot.active::before {
-        background: #fff;
-        transform: translate(-50%, -50%) scale(1.2);
+        gap: 12px; /* Separación más compacta en desktop */
     }
 }
 
