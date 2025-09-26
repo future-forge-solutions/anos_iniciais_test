@@ -7,10 +7,9 @@
     <title>Aprende Brasil Digital</title>
     <!-- Preload crítico para LCP -->
 
-    <!-- Google Fonts - Inter -->
+    <!-- Google Fonts - Preconnect only for faster loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <!-- Preload fuentes Font Awesome -->
     <link rel="preload" href="fontawesome/webfonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="preload" href="fontawesome/webfonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
@@ -225,6 +224,19 @@
     <script src="js/carousel.js" defer></script>
     
     <script>
+        // Load Inter font asynchronously
+        (function() {
+            var link = document.createElement('link');
+            link.href = 'https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap';
+            link.rel = 'stylesheet';
+            document.head.appendChild(link);
+
+            // Apply Inter font when loaded
+            link.onload = function() {
+                document.body.style.fontFamily = "'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif";
+            };
+        })();
+
         // Register Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', function() {
