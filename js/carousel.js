@@ -85,6 +85,10 @@ document.addEventListener('DOMContentLoaded', function () {
         dotsContainer.innerHTML = '';
         dots = [];
 
+        // Use DocumentFragment to minimize DOM manipulation and reflow
+        const slidesFragment = document.createDocumentFragment();
+        const dotsFragment = document.createDocumentFragment();
+
         validBanners.forEach((banner, index) => {
             console.log(`Procesando banner ${index + 1}:`, banner);
 
@@ -119,7 +123,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 slide.appendChild(picture);
             }
 
-            carouselTrack.appendChild(slide);
+            slidesFragment.appendChild(slide);
 
             const dot = document.createElement('button');
             dot.className = 'carousel-dot';
@@ -129,23 +133,34 @@ document.addEventListener('DOMContentLoaded', function () {
                 dot.setAttribute('aria-current', 'true');
             }
             dot.addEventListener('click', () => goToSlide(index));
-            dotsContainer.appendChild(dot);
+            dotsFragment.appendChild(dot);
             dots.push(dot);
         });
+
+        // Batch DOM insertions to minimize reflow
+        carouselTrack.appendChild(slidesFragment);
+        dotsContainer.appendChild(dotsFragment);
 
         currentIndex = 0;
         updateCarousel();
     }
 
     function updateCarousel() {
-        carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentIndex);
-            if (index === currentIndex) {
-                dot.setAttribute('aria-current', 'true');
-            } else {
-                dot.removeAttribute('aria-current');
-            }
+        // Use requestAnimationFrame to batch DOM updates and avoid forced reflow
+        requestAnimationFrame(() => {
+            carouselTrack.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+            // Batch DOM updates to minimize reflow
+            dots.forEach((dot, index) => {
+                const isActive = index === currentIndex;
+                dot.classList.toggle('active', isActive);
+
+                if (isActive) {
+                    dot.setAttribute('aria-current', 'true');
+                } else {
+                    dot.removeAttribute('aria-current');
+                }
+            });
         });
     }
 
@@ -198,5 +213,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 2000);
     });
 
-    window.addEventListener('resize', updateCarousel);
+    // Debounced resize handler to prevent excessive reflow during window resize
+    let resizeTimeout;
+    window.addEventListener('resize', () => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(updateCarousel, 150);
+    });
 });

@@ -331,6 +331,10 @@ body {
     display: flex;
     transition: transform 0.5s ease-in-out;
     width: 100%;
+    /* Hardware acceleration to reduce reflow and improve performance */
+    transform: translateZ(0);
+    will-change: transform;
+    backface-visibility: hidden;
 }
 
 .carousel-slide {
