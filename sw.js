@@ -13,12 +13,7 @@ const urlsToCache = [
   BASE_PATH + '/fontawesome/webfonts/fa-brands-400.woff2',
 
   // Inter Local Fonts
-  BASE_PATH + '/fonts/inter.css',
-  BASE_PATH + '/fonts/inter-300.woff2',
-  BASE_PATH + '/fonts/inter-400.woff2',
-  BASE_PATH + '/fonts/inter-500.woff2',
-  BASE_PATH + '/fonts/inter-600.woff2',
-  BASE_PATH + '/fonts/inter-700.woff2',
+  
 
   // Imágenes desktop
   BASE_PATH + '/images/banner.webp',
