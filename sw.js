@@ -13,6 +13,10 @@ const urlsToCache = [
   BASE_PATH + '/fontawesome/webfonts/fa-brands-400.woff2',
 
   // Inter Local Fonts
+  // BASE_PATH + '/fonts/inter-400.woff2',
+  // BASE_PATH + '/fonts/inter-500.woff2',
+  // BASE_PATH + '/fonts/inter-600.woff2',
+  // BASE_PATH + '/fonts/inter-700.woff2',
   
 
   // Imágenes desktop
@@ -76,6 +80,10 @@ self.addEventListener('activate', function(event) {
 self.addEventListener('fetch', function(event) {
   // Solo interceptar recursos de nuestro sitio
   if (!event.request.url.includes('future-forge-solutions.github.io')) {
+    // No interceptar solicitudes de Google Fonts
+    if (event.request.url.includes('fonts.googleapis.com') || event.request.url.includes('fonts.gstatic.com')) {
+      return;
+    }
     return;
   }
 
