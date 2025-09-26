@@ -91,9 +91,18 @@ document.addEventListener('DOMContentLoaded', function () {
             const slide = document.createElement('div');
             slide.className = 'carousel-slide';
 
+            const picture = document.createElement('picture');
+
+            const source = document.createElement('source');
+            source.media = '(max-width: 768px)';
+            source.srcset = banner.image.replace('images/corousel/', 'images/mobile/corousel/');
+
             const img = document.createElement('img');
             img.src = banner.image;
             img.alt = `Banner ${index + 1}`;
+
+            picture.appendChild(source);
+            picture.appendChild(img);
 
             if (banner.link && banner.link !== '') {
                 const anchor = document.createElement('a');
@@ -101,13 +110,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 anchor.target = '_blank';
                 anchor.rel = 'noopener noreferrer';
                 anchor.className = 'carousel-link';
-                anchor.appendChild(img);
+                anchor.appendChild(picture);
                 slide.appendChild(anchor);
                 img.draggable = false;
                 img.style.userSelect = 'none';
                 img.style.cursor = 'pointer';
             } else {
-                slide.appendChild(img);
+                slide.appendChild(picture);
             }
 
             carouselTrack.appendChild(slide);
