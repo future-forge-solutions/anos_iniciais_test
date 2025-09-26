@@ -1,46 +1,47 @@
 const CACHE_NAME = 'aprende-brasil-v4'; // Fuentes locales
+const BASE_PATH = '/anos_iniciais_test';
 const urlsToCache = [
   // Recursos principales
-  '/',
-  '/styles.css',
-  '/js/carousel.js',
-  '/icons/novedades.svg',
+  BASE_PATH + '/',
+  BASE_PATH + '/styles.css',
+  BASE_PATH + '/js/carousel.js',
+  BASE_PATH + '/icons/novedades.svg',
 
   // Font Awesome
-  '/fontawesome/css/fontawesome-minimal.css',
-  '/fontawesome/webfonts/fa-solid-900.woff2',
-  '/fontawesome/webfonts/fa-brands-400.woff2',
+  BASE_PATH + '/fontawesome/css/fontawesome-minimal.css',
+  BASE_PATH + '/fontawesome/webfonts/fa-solid-900.woff2',
+  BASE_PATH + '/fontawesome/webfonts/fa-brands-400.woff2',
 
 
   
 
   // Imágenes desktop
-  '/images/banner.webp',
-  '/images/footer_logo.webp',
-  '/images/arte.webp',
-  '/images/ciencias.webp',
-  '/images/educacaofisica.webp',
-  '/images/geografia.webp',
-  '/images/historia.webp',
-  '/images/linguainglesa.webp',
-  '/images/liguaportuguesa.webp',
-  '/images/matematica.webp',
-  '/images/corousel/news1.webp',
-  '/images/corousel/news2.webp',
+  BASE_PATH + '/images/banner.webp',
+  BASE_PATH + '/images/footer_logo.webp',
+  BASE_PATH + '/images/arte.webp',
+  BASE_PATH + '/images/ciencias.webp',
+  BASE_PATH + '/images/educacaofisica.webp',
+  BASE_PATH + '/images/geografia.webp',
+  BASE_PATH + '/images/historia.webp',
+  BASE_PATH + '/images/linguainglesa.webp',
+  BASE_PATH + '/images/liguaportuguesa.webp',
+  BASE_PATH + '/images/matematica.webp',
+  BASE_PATH + '/images/corousel/news1.webp',
+  BASE_PATH + '/images/corousel/news2.webp',
 
   // Imágenes móviles
-  '/images/mobile/banner.webp',
-  '/images/mobile/footer_logo.webp',
-  '/images/mobile/arte.webp',
-  '/images/mobile/ciencias.webp',
-  '/images/mobile/educacaofisica.webp',
-  '/images/mobile/geografia.webp',
-  '/images/mobile/historia.webp',
-  '/images/mobile/linguainglesa.webp',
-  '/images/mobile/liguaportuguesa.webp',
-  '/images/mobile/matematica.webp',
-  '/images/mobile/corousel/news1.webp',
-  '/images/mobile/corousel/news2.webp'
+  BASE_PATH + '/images/mobile/banner.webp',
+  BASE_PATH + '/images/mobile/footer_logo.webp',
+  BASE_PATH + '/images/mobile/arte.webp',
+  BASE_PATH + '/images/mobile/ciencias.webp',
+  BASE_PATH + '/images/mobile/educacaofisica.webp',
+  BASE_PATH + '/images/mobile/geografia.webp',
+  BASE_PATH + '/images/mobile/historia.webp',
+  BASE_PATH + '/images/mobile/linguainglesa.webp',
+  BASE_PATH + '/images/mobile/liguaportuguesa.webp',
+  BASE_PATH + '/images/mobile/matematica.webp',
+  BASE_PATH + '/images/mobile/corousel/news1.webp',
+  BASE_PATH + '/images/mobile/corousel/news2.webp'
 ];
 
 self.addEventListener('install', function(event) {
@@ -73,8 +74,12 @@ self.addEventListener('activate', function(event) {
 });
 
 self.addEventListener('fetch', function(event) {
-  // No interceptar solicitudes de Google Fonts
-  if (event.request.url.includes('fonts.googleapis.com') || event.request.url.includes('fonts.gstatic.com')) {
+  // Solo interceptar recursos de nuestro sitio
+  if (!event.request.url.includes('future-forge-solutions.github.io')) {
+    // No interceptar solicitudes de Google Fonts
+    if (event.request.url.includes('fonts.googleapis.com') || event.request.url.includes('fonts.gstatic.com')) {
+      return;
+    }
     return;
   }
 
@@ -100,7 +105,8 @@ self.addEventListener('fetch', function(event) {
               event.request.url.includes('.woff2') ||
               event.request.url.includes('.css') ||
               event.request.url.includes('.js') ||
-              event.request.url.includes('.svg')) {
+              event.request.url.includes('.svg') ||
+              event.request.url.includes('anos_iniciais_test')) {
 
             caches.open(CACHE_NAME)
               .then(function(cache) {
