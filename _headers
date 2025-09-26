@@ -1,0 +1,9 @@
+/*
+ * Custom headers for Cloudflare Pages
+ */
+
+/fonts/*.woff2
+  Content-Type: font/woff2
+
+/sw.js
+  Content-Type: application/javascript
