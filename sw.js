@@ -1,4 +1,4 @@
-const CACHE_NAME = 'aprende-brasil-v3'; // Fuentes locales
+const CACHE_NAME = 'aprende-brasil-v4'; // Fuentes locales
 const BASE_PATH = '/anos_iniciais_test';
 const urlsToCache = [
   // Recursos principales
@@ -12,11 +12,7 @@ const urlsToCache = [
   BASE_PATH + '/fontawesome/webfonts/fa-solid-900.woff2',
   BASE_PATH + '/fontawesome/webfonts/fa-brands-400.woff2',
 
-  // Inter Local Fonts
-  // BASE_PATH + '/fonts/inter-400.woff2',
-  // BASE_PATH + '/fonts/inter-500.woff2',
-  // BASE_PATH + '/fonts/inter-600.woff2',
-  // BASE_PATH + '/fonts/inter-700.woff2',
+
   
 
   // Imágenes desktop
