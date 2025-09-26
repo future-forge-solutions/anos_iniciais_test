@@ -211,6 +211,8 @@ body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    min-height: 100vh;
+    contain: layout;
 }
 /* Hero Section */
 .hero {
@@ -226,6 +228,8 @@ body {
     overflow: hidden;
     width: 100%;
     max-width: 100%;
+    height: 400px;
+    contain: layout;
 }
 .hero-content {
     flex: 1;
@@ -437,6 +441,22 @@ body {
     .carousel-dots {
         gap: 12px; /* Separación más compacta en desktop */
     }
+
+    /* Desktop specific layout optimizations */
+    .main-content {
+        min-height: 100vh;
+        contain: layout;
+    }
+
+    .hero {
+        height: 400px;
+        contain: layout;
+    }
+
+    .subjects-grid {
+        min-height: 288px;
+        contain: layout;
+    }
 }
 
 .news-image {
@@ -453,6 +473,7 @@ body {
     gap: 20px;
     margin-bottom: 40px;
     min-height: 288px; /* Reserve space to prevent layout shift */
+    contain: layout;
 }
 .subject-card {
     background: white;
