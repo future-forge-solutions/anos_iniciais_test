@@ -365,7 +365,7 @@ body {
     background: rgba(255, 255, 255, 0.7);
     border: none;
     border-radius: 50%;
-    width: 40px;
+    width: 40px; /* Tamaño original para desktop */
     height: 40px;
     cursor: pointer;
     display: flex;
@@ -375,6 +375,15 @@ body {
     font-size: 18px;
     z-index: 10;
     transition: all 0.3s ease;
+}
+
+/* Botones de navegación optimizados SOLO para móvil */
+@media (max-width: 768px) {
+    .carousel-button {
+        width: 44px; /* Tamaño táctil óptimo para móvil */
+        height: 44px;
+        font-size: 20px; /* Icono ligeramente más grande */
+    }
 }
 
 .carousel-button:hover {
@@ -414,6 +423,43 @@ body {
 .carousel-dot.active {
     background: #fff;
     transform: scale(1.2);
+}
+
+/* Objetivos táctiles optimizados SOLO para móvil */
+@media (max-width: 768px) {
+    .carousel-dots {
+        gap: 16px; /* Mayor separación en móvil */
+    }
+
+    .carousel-dot {
+        width: 44px; /* Tamaño táctil óptimo para móvil */
+        height: 44px;
+        position: relative;
+        background: transparent; /* Área táctil invisible */
+    }
+
+    .carousel-dot::before {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.5);
+        transition: all 0.3s ease;
+    }
+
+    .carousel-dot.active {
+        background: transparent;
+        transform: none;
+    }
+
+    .carousel-dot.active::before {
+        background: #fff;
+        transform: translate(-50%, -50%) scale(1.2);
+    }
 }
 
 .news-image {
