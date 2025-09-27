@@ -167,34 +167,113 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (e.target.closest('.carousel-button.prev')) {
             e.preventDefault();
+            e.stopPropagation();
             goToSlide(currentIndex - 1);
+            pauseAutoPlay(5000); // Pause for 5 seconds
             return;
         }
 
         if (e.target.closest('.carousel-button.next')) {
             e.preventDefault();
+            e.stopPropagation();
             goToSlide(currentIndex + 1);
+            pauseAutoPlay(5000); // Pause for 5 seconds
             return;
         }
     }
 
+    // Add both click and touch events for better mobile support
     document.addEventListener('click', handleCarouselClick);
+    document.addEventListener('touchend', handleCarouselClick);
+
+    // Direct event listeners for buttons as backup
+    if (prevButton) {
+        console.log('Prev button found:', prevButton);
+        prevButton.addEventListener('click', (e) => {
+            console.log('Prev button clicked');
+            e.preventDefault();
+            e.stopPropagation();
+            goToSlide(currentIndex - 1);
+            pauseAutoPlay(5000); // Pause for 5 seconds
+        });
+        prevButton.addEventListener('touchstart', (e) => {
+            console.log('Prev button touch start');
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        prevButton.addEventListener('touchend', (e) => {
+            console.log('Prev button touch end');
+            e.preventDefault();
+            e.stopPropagation();
+            goToSlide(currentIndex - 1);
+            pauseAutoPlay(5000); // Pause for 5 seconds
+        });
+
+        // Make sure button is visible and clickable
+        prevButton.style.pointerEvents = 'auto';
+        prevButton.style.position = 'absolute';
+        prevButton.style.zIndex = '1000';
+    }
+
+    if (nextButton) {
+        console.log('Next button found:', nextButton);
+        nextButton.addEventListener('click', (e) => {
+            console.log('Next button clicked');
+            e.preventDefault();
+            e.stopPropagation();
+            goToSlide(currentIndex + 1);
+            pauseAutoPlay(5000); // Pause for 5 seconds
+        });
+        nextButton.addEventListener('touchstart', (e) => {
+            console.log('Next button touch start');
+            e.preventDefault();
+            e.stopPropagation();
+        });
+        nextButton.addEventListener('touchend', (e) => {
+            console.log('Next button touch end');
+            e.preventDefault();
+            e.stopPropagation();
+            goToSlide(currentIndex + 1);
+            pauseAutoPlay(5000); // Pause for 5 seconds
+        });
+
+        // Make sure button is visible and clickable
+        nextButton.style.pointerEvents = 'auto';
+        nextButton.style.position = 'absolute';
+        nextButton.style.zIndex = '1000';
+    }
 
     if (!window.carouselInitialized) {
         initCarousel();
         window.carouselInitialized = true;
     }
 
-    let slideInterval = setInterval(() => {
-        goToSlide(currentIndex + 1);
-    }, 2000);
+    let slideInterval;
+    let pauseTimeout;
+
+    function startAutoPlay() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(() => {
+            goToSlide(currentIndex + 1);
+        }, 2000);
+    }
+
+    function pauseAutoPlay(duration = 5000) {
+        clearInterval(slideInterval);
+        clearTimeout(pauseTimeout);
+        pauseTimeout = setTimeout(() => {
+            startAutoPlay();
+        }, duration);
+    }
+
+    // Start initial auto-play
+    startAutoPlay();
 
     const carousel = document.querySelector('.carousel-container');
     carousel.addEventListener('mouseenter', () => clearInterval(slideInterval));
     carousel.addEventListener('mouseleave', () => {
-        slideInterval = setInterval(() => {
-            goToSlide(currentIndex + 1);
-        }, 2000);
+        clearTimeout(pauseTimeout);
+        startAutoPlay();
     });
 
     window.addEventListener('resize', updateCarousel);
