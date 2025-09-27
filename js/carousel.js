@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Add both click and touch events for better mobile support
     document.addEventListener('click', handleCarouselClick);
-    document.addEventListener('touchend', handleCarouselClick);
+    document.addEventListener('touchend', handleCarouselClick, { passive: true });
 
     // Direct event listeners for buttons as backup
     if (prevButton) {
@@ -200,14 +200,14 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Prev button touch start');
             e.preventDefault();
             e.stopPropagation();
-        });
+        }, { passive: false });
         prevButton.addEventListener('touchend', (e) => {
             console.log('Prev button touch end');
             e.preventDefault();
             e.stopPropagation();
             goToSlide(currentIndex - 1);
             pauseAutoPlay(5000); // Pause for 5 seconds
-        });
+        }, { passive: false });
 
         // Make sure button is visible and clickable
         prevButton.style.pointerEvents = 'auto';
@@ -228,14 +228,14 @@ document.addEventListener('DOMContentLoaded', function () {
             console.log('Next button touch start');
             e.preventDefault();
             e.stopPropagation();
-        });
+        }, { passive: false });
         nextButton.addEventListener('touchend', (e) => {
             console.log('Next button touch end');
             e.preventDefault();
             e.stopPropagation();
             goToSlide(currentIndex + 1);
             pauseAutoPlay(5000); // Pause for 5 seconds
-        });
+        }, { passive: false });
 
         // Make sure button is visible and clickable
         nextButton.style.pointerEvents = 'auto';
@@ -270,11 +270,11 @@ document.addEventListener('DOMContentLoaded', function () {
     startAutoPlay();
 
     const carousel = document.querySelector('.carousel-container');
-    carousel.addEventListener('mouseenter', () => clearInterval(slideInterval));
+    carousel.addEventListener('mouseenter', () => clearInterval(slideInterval), { passive: true });
     carousel.addEventListener('mouseleave', () => {
         clearTimeout(pauseTimeout);
         startAutoPlay();
-    });
+    }, { passive: true });
 
-    window.addEventListener('resize', updateCarousel);
+    window.addEventListener('resize', updateCarousel, { passive: true });
 });
