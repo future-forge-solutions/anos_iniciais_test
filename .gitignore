@@ -1,2 +1,5 @@
 regenerate_mobile_images.sh
 optimize_mobile_images.sh
+generate_from_originals.sh
+.gitignore
+mobile_from_originals.sh
