@@ -4,3 +4,4 @@ generate_from_originals.sh
 .gitignore
 mobile_from_originals.sh
 generate_high_res_mobile.sh
+resize_mobile_images_lossless.sh
