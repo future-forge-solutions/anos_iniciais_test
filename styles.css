@@ -737,19 +737,6 @@ body {
     font-size: 12px;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
-
-/* Overlay sutil para el footer principal */
-.footer::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.06) 0%, rgba(0, 0, 0, 0.03) 100%);
-    pointer-events: none;
-    z-index: -1;
-}
 .footer-top {
     display: flex;
     justify-content: space-between;
@@ -759,25 +746,6 @@ body {
     margin: 0 auto 20px;
     padding: 0 20px;
     box-sizing: border-box;
-    position: relative;
-    z-index: 1;
-}
-
-/* Mejorar contraste de todo el texto del footer, excluyendo iconos */
-.footer-top span,
-.footer-top a:not(.social-icons a),
-.footer span,
-.footer a:not(.social-icons a) {
-    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.3);
-    font-weight: 500;
-}
-
-/* Asegurar que los iconos no se vean afectados */
-.footer i,
-.footer .fab,
-.footer .fas {
-    text-shadow: none !important;
-    font-weight: 900 !important;
 }
 .footer-col {
     flex: 1;
@@ -882,6 +850,7 @@ body {
     align-items: center;
     gap: 6px;
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    text-transform: uppercase;
 }
 .back-to-top:hover {
     opacity: 1;
@@ -902,31 +871,8 @@ body {
     background: #96D16F;
     padding: 15px 0;
     text-align: center;
-    position: relative;
-}
-
-/* Crear overlay sutil para mejorar contraste sin cambiar el color base */
-.footer-bottom::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.08) 0%, rgba(0, 0, 0, 0.05) 100%);
-    pointer-events: none;
-}
-
-.footer-bottom span,
-.footer-bottom a {
-    position: relative;
-    z-index: 1;
-    /* Efectos para mejorar contraste */
-    text-shadow:
-        0 1px 1px rgba(0, 0, 0, 0.3),
-        0 0 1px rgba(0, 0, 0, 0.4);
-    font-weight: 600;
-    letter-spacing: 0.01em;
+    width: 100%;
+    text-transform: uppercase;
 }
 
 .footer-bottom-content {
@@ -949,6 +895,7 @@ body {
 
 .footer-bottom-left {
     text-align: left;
+    white-space: nowrap;
 }
 
 .footer-bottom-center {
